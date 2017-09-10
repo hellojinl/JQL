@@ -1,0 +1,6 @@
+[ SUCCESS ] test from: empty directory
+[ SUCCESS ] test from: empty file
+[ SUCCESS ] test from: one file
+[ SUCCESS ] test from: two files
+[ SUCCESS ] test from: three files
+[ SUCCESS ] test from: not java agent log

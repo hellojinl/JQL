@@ -1,0 +1,4 @@
+[ SUCCESS ] test limit: positive integer
+[ SUCCESS ] test limit: zero
+[ SUCCESS ] test limit: negtive integer
+[ SUCCESS ] test limit: float

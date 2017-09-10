@@ -1,0 +1,136 @@
+﻿jql语法：
+[select title1[, title2, title3, ... ]]
+<from file1|dir1 [encoding1][, file2|dir2 [encoding2], ... ]>
+[where logical expression]
+[order by title1 [asc|desc][, title2 [asc|desc], ...]]
+[limit integer]
+[into filename]
+
+===================================================================================
+测试点1：from功能是否正确
+a. 测试空文件夹
+from point1/agentLog/emptyDir
+into point1/A_actual;
+
+b. 测试空日志
+from point1/agentLog/empty_log.log
+into point1/B_actual;
+
+c. 测试1个日志
+from point1/agentLog/log1.log
+into point1/C_actua;
+
+d. 测试2个日志
+from point1/agentLog/log1.log, point1/agentLog/log2.log
+into point1/D_actual;
+
+e. 测试3个日志
+from point1/agentLog/log1.log, point1/agentLog/log2.log, point1/agentLog/log3.log
+into point1/E_actual;
+
+f. 测试非java-agent日志
+from point1/agentLog/notAgent/log1.log
+into point1/F_actual;
+
+===================================================================================
+测试点2：select功能是否正确
+a. 测试avg time, method, start time
+select avg time, method, start time
+from point2/agentLog/log1.log
+into point2/actualA;
+
+b. 测试count, time, class, end time
+select count, time, class, end time
+from point2/agentLog/log2.log
+into point2/actualB;
+
+===================================================================================
+测试点3：order by功能是否正确
+a. 测试avg time默认排序：
+select avg time
+from point3/agentLog/
+order by avg time
+into point3/A_actual;
+
+b. 测试avg time升序
+select avg time
+from point3/agentLog/
+order by avg time asc
+into point3/B_actual;
+
+c. 测试avg time降序
+select avg time
+from point3/agentLog/
+order by avg time desc
+into point3/C_actua;
+
+d. 测试time升序
+select time
+from point3/agentLog/
+order by time asc
+into point3/D_actual;
+
+e. 测试time降序
+select time
+from point3/agentLog/
+order by time desc
+into point3/E_actual;
+
+f. 测试start time升序
+select start time
+from point3/agentLog/
+order by start time asc
+into point3/F_actual;
+
+g. 测试start time降序
+select start time
+from point3/agentLog/
+order by start time desc
+into point3/G_actual;
+
+===================================================================================
+测试点4：limit功能是否正确
+a. 测试正整数：
+select avg time
+from point4/agentLog/
+order by avg time desc
+limit 10
+into point4/A_actual;
+
+b. 测试0：
+select avg time
+from point4/agentLog/
+order by avg time desc
+limit 0
+into point4/B_actual;
+
+c. 测试负整数
+select avg time
+from point4/agentLog/
+order by avg time desc
+limit -10
+into point4/C_actua;
+
+d. 测试浮点数
+select avg time
+from point4/agentLog/
+order by avg time desc
+limit 10.3
+into point4/D_actual;
+
+===================================================================================
+测试点5：where功能是否正确
+测试jql：
+from point5/agentLog/
+where (avg time > 1000 or avg time < 100) and count >= 10000
+order by avg time desc
+limit 10
+into point5/actual;
+
+
+
+
+
+
+
+

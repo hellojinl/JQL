@@ -1,0 +1,35 @@
+﻿目标：
+1. 确保jql的正确性
+2. 降低人工测试的成本
+
+实现流程：
+1. 确定测试点（见'jql自动化测试点'）（区别于单元测试）
+2. 随机的生成agentLog日志
+3. 根据各个测试点生成测试结果，写入文件
+4. 运行jql，将结果写入文件
+5. 比较分析结果，屏幕上显示概要，文件中显示详情
+6. 测试数据、期望结果、实际结果存入一个文件夹中，并有一份总结
+
+要求：
+1. 能够随机的生成类名、包名、方法名、方法使用时间，方法调用次数，方法使用平均时间，
+开始时间、结束时间
+2. 按照agentLog日志特点，随着时间的增加，随机的增加类的个数，方法的个数，方法使用时间、
+方法调用次数
+3. 能够生成正确的期望结果，用于和实际结果做比较
+4. 能够正确的将期望结果和实际结果的不同之处保留（输出）
+5. 速度必须快（小于20秒）
+6. 测试结果必须可靠
+
+代码：
+整个自动化测试的代码围绕5个测试点展开
+point1_test_from.py -- 测试结果在auto_test_result/test_from
+point2_test_select.py -- 测试结果在auto_test_result/test_select
+point3_test_order_by.py -- 测试结果在auto_test_result/test_order_by
+point4_test_limit.py -- 测试结果在auto_test_result/test_limit
+point5_test_where.py -- 测试结果在auto_test_result/test_where
+
+测试结果说明：
+agentLog -- 测试数据
+_result_cmp -- 测试结果
+*_actual -- 测试功能实际结果
+*_expected -- 测试功能期望结果

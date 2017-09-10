@@ -1,0 +1,7 @@
+[ SUCCESS ] test order by: avg time default order
+[ SUCCESS ] test order by: avg time asc order
+[ SUCCESS ] test order by: avg time desc order
+[ SUCCESS ] test order by: time asc order
+[ SUCCESS ] test order by: time desc order
+[ SUCCESS ] test order by: start time asc order
+[ SUCCESS ] test order by: start time desc order

@@ -1,0 +1,138 @@
++------------------------------------------------------------+
+|说明：例子中当前目录默认为src，否则需要修改文件路径,        |
+|在src目录下运行命令jql，将例子复制上去（一次可以多行）即可  |
++------------------------------------------------------------+
+
+例1：最简单的查询
+from ../testdatas/agentLog2/agent.2015-10-26.log;
+
+例2：最简单的查询
+from ../testdatas/agentLog;
+
+例3：查询某几列
+select count, method, class
+from ../testdatas/agentLog2/agent.2015-10-26.log
+order by count desc
+limit 30;
+
+例4: 查询单个文件夹
+select count, time, avg time, method, class, start time, end time 
+from ../testdatas/agentLog2
+where count > 10 and end time > 2015-10-26 14:40:35 
+    and start time >= 2015-10-26 14:37:56
+order by count desc, time desc, avg time desc
+limit 100;
+
+例5：查询多个文件夹
+select count, time, avg time, method, class, start time, end time 
+from ../testdatas/agentLog3, ../testdatas/agentLog4
+where count > 100
+order by count desc, time desc, avg time desc
+limit 60;
+
+例6：查询单个文件
+select avg time, time, count, method, class, start time, end time 
+from ../testdatas/agentLog2/agent.2015-10-26.log
+where count > 20 and end time > 2015-10-26 14:40:35 
+    and start time >= 2015-10-26 14:37:56
+order by avg time desc, time desc, count desc
+limit 50;
+
+例7：查询多个文件
+select avg time, time, count, method, class, start time, end time 
+from ../testdatas/agentLog2/agent.2015-10-26.log utf-8, ../testdatas/agentLog2/agent.2015-10-24.log gbk, ../testdatas/agentLog2/agent.2015-10-25.log
+where count > 10 and end time > 2015-10-26 14:40:35 
+    and start time >= 2015-10-26 14:37:56
+order by avg time desc, time desc, count desc
+limit 80;
+
+例8：查询文件夹和文件
+select avg time, time, count, method, class, start time, end time 
+from ../testdatas/agentLog3, ../testdatas/agentLog2/agent.2015-10-26.log
+where count > 10 and end time > 2015-10-26 14:40:35 
+    and start time >= 2015-10-26 14:37:56
+order by avg time desc, time desc, count desc
+limit 70;
+
+例9：条件过滤，查询某个类的所有方法
+select avg time, time, count, method, class, start time, end time 
+from ../testdatas/agentLog2/agent.2015-10-26.log
+where class=com.thunisoft.susong51.sfks.service.getter.people.impl.ZxPeopleGetter
+order by avg time desc
+limit 100;
+
+例10：条件过滤，查询某个类的某个方法，order by默认升序排列
+select avg time, time, count, method, class, start time, end time 
+from ../testdatas/agentLog2/agent.2015-10-26.log
+where class=com.thunisoft.susong51.sfks.service.getter.people.impl.ZxPeopleGetter
+    and method=getSsdlrList
+order by avg time;
+
+例11：查询某个时间以后的数据
+select start time, time, count, method, class
+from ../testdatas/agentLog3, ../testdatas/agentLog4
+where start time >= 2015-10-26 14:37:56
+order by start time desc;
+
+例12：查询平局时间大于200ms的数据
+select avg time, time, count, method, class
+from ../testdatas/agentLog3, ../testdatas/agentLog4
+where avg time > 200
+order by avg time desc;
+
+例13：查询总时间大于200ms的数据且调用次数大于30次的
+select time, count, method, class
+from ../testdatas/agentLog3, ../testdatas/agentLog4
+where time > 200 and count > 30
+order by time desc, count desc;
+
+例14：条件过滤，查询某个类的所有方法
+select avg time, time, count, method, class, start time, end time 
+from ../testdatas/agentLog2/agent.2015-10-26.log
+where class=com.thunisoft.susong51.sfks.service.getter.people.impl.ZxPeopleGetter
+    or class=com.thunisoft.susong51.sfks.service.getter.writ.impl.LayyGetter
+order by avg time desc
+limit 100;
+
+
+例15 复杂的逻辑表达式，并保存到文件result中
+select avg time, time, count, method, class, start time, end time 
+from ../testdatas/agentLog
+where (avg time >= 100 and avg time <= 1000) and count > 2 
+    and (time < 400 or time > 1000) 
+    and (start time >= 2015-10-24 16:27:15 and start time <= 2015-10-26 14:41:08)
+order by avg time desc, count desc
+limit 200
+into result;
+
+例16：错误的jql
+from ../testdatas/agentLog3, ../testdatas/agentLog4
+where time > 200 > 30
+order by time desc, count desc;
+
+select avg time, time, count, method, class, start time, end time 
+from ../testdatas/agentLog2/agent.2015-10-26.log
+where count=com.thunisoft.susong51.sfks.service.getter.people.impl.ZxPeopleGetter
+order by avg time desc
+limit 100;
+
+from ../testdatas/agentLog3, ../testdatas/agentLog4
+where class = where 
+order by time desc, count desc;
+
+例17：自动化生成 - 生成日志正确性分析
+select avg time, time, count, method, class, start time, end time 
+from ../testdatas/agentLog/test_java_agent.log
+order by avg time desc, time desc, count desc
+limit 100
+into test;
+
+例18：
+from E:\JQL\test\auto\auto_test_result\test_from\agentLog\emptyDir;
+
+from E:\JQL\test\auto\auto_test_result\test_from\agentLog\log3.log
+into log3;
+
+
+
+
